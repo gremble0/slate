@@ -1,23 +1,10 @@
 #include <fstream>
-#include <ios>
-#include <iostream>
 #include <string>
 #include <vector>
 
-static int id_count = 0;
+#include "SlateBuffer.hpp"
 
-class SlateBuffer
-{
-    public:
-        SlateBuffer(std::string title = "", std::string path = "");
-        ~SlateBuffer();
-        std::string title;
-        std::string path;
-    protected:
-        int id;
-        std::fstream file;
-        std::vector<std::string> lines;
-};
+static int id_count = 0;
 
 /**
  * @param id    unique id for this buffer
@@ -39,15 +26,11 @@ SlateBuffer::SlateBuffer(std::string title, std::string path)
 
     // TODO error checking
     // TODO check if in and out flags are necessary
-    file.open(path, std::ios::in | std::ios::out);
+    file.open(path);
 
     std::string cur_line;
     while (std::getline(file, cur_line)) {
         lines.push_back(cur_line);
-    }
-
-    for (const auto& line : lines) {
-        std::cout << line << std::endl;
     }
 }
 
