@@ -1,5 +1,6 @@
 #include <gtkmm.h>
 #include <vector>
+
 #include "glibmm/refptr.h"
 #include "gtkmm/enums.h"
 #include "gtkmm/scrolledwindow.h"
@@ -16,7 +17,7 @@ class SlateWindow : public Gtk::Window
         void SetActiveBuffer(SlateBuffer &buffer);
     protected:
         // TODO: integrate our types with the GTK types
-        std::vector<SlateBuffer> buffers;
+        std::vector<SlateBuffer*> buffers;
         Gtk::ScrolledWindow scrolled_window;
         Gtk::TextView text_view;
         Gtk::Box view;
@@ -37,7 +38,7 @@ SlateWindow::SlateWindow() : view(Gtk::Orientation::VERTICAL)
     view.set_margin(5);
 
     SlateBuffer buffer = SlateBuffer("Welcome to Slate");
-    // buffers.push_back(buffer);
+    buffers.push_back(&buffer);
     active_buffer = Gtk::TextBuffer::create();
     SetActiveBuffer(buffer);
 }
