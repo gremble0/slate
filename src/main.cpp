@@ -1,23 +1,51 @@
 #include <gtkmm.h>
-#include "gtkmm/button.h"
+#include <vector>
+#include "glibmm/refptr.h"
+#include "gtkmm/enums.h"
+#include "gtkmm/scrolledwindow.h"
+#include "gtkmm/textbuffer.h"
+#include "gtkmm/textview.h"
 #include "ui.hpp"
 #include "SlateBuffer.cpp"
 
+// TODO: Slate::Window, Slate::Buffer, etc
 class SlateWindow : public Gtk::Window 
 {
     public:
         SlateWindow();
-        void MakeButtonBox();
+        void SetActiveBuffer(SlateBuffer &buffer);
     protected:
-        void on_button_clicked();
-        Gtk::Button slate_button;
+        // TODO: integrate our types with the GTK types
+        std::vector<SlateBuffer> buffers;
+        Gtk::ScrolledWindow scrolled_window;
+        Gtk::TextView text_view;
+        Gtk::Box view;
+        Glib::RefPtr<Gtk::TextBuffer> active_buffer;
 };
 
-SlateWindow::SlateWindow()
+SlateWindow::SlateWindow() : view(Gtk::Orientation::VERTICAL)
 {
     set_title("Slate");
+    set_child(view);
     set_default_size(WINDOW_WIDTH, WINDOW_HEIGHT);
-    SlateBuffer buffer = SlateBuffer("title", "/home/herman/.gitignore");
+    
+    // TODO: respect user config
+    scrolled_window.set_child(text_view);
+    scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
+    scrolled_window.set_expand();
+    view.append(scrolled_window);
+    view.set_margin(5);
+
+    SlateBuffer buffer = SlateBuffer("Welcome to Slate");
+    // buffers.push_back(buffer);
+    active_buffer = Gtk::TextBuffer::create();
+    SetActiveBuffer(buffer);
+}
+
+void SlateWindow::SetActiveBuffer(SlateBuffer &buffer)
+{
+    active_buffer->set_text(buffer.get_lines());
+    text_view.set_buffer(active_buffer);
 }
 
 int main(int argc, char **argv)

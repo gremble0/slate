@@ -6,6 +6,7 @@
 
 static int id_count = 0;
 
+// TODO: inherit from Gtk::TextBuffer??
 /**
  * @param id    unique id for this buffer
  * @param title title for this buffer, empty if the buffer is for a file
@@ -15,17 +16,9 @@ static int id_count = 0;
 SlateBuffer::SlateBuffer(std::string title, std::string path)
 {
     this->id = id_count++;
-
-    if (title != "") {
-        this->title = title;
-    }
-
-    if (path != "") {
-        this->path = path;
-    }
+    this->title = title;
 
     // TODO error checking
-    // TODO check if in and out flags are necessary
     file.open(path);
 
     std::string cur_line;
@@ -37,4 +30,15 @@ SlateBuffer::SlateBuffer(std::string title, std::string path)
 SlateBuffer::~SlateBuffer()
 {
     file.close();
+}
+
+std::string SlateBuffer::get_lines()
+{
+    std::string out = "";
+
+    for (std::string line : lines) {
+        out.append(line + "\n");
+    }
+
+    return out;
 }

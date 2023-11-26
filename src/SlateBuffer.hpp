@@ -7,10 +7,10 @@
 class SlateBuffer
 {
 public:
-    SlateBuffer(std::string title = "", std::string path = "");
+    SlateBuffer(std::string title = "[No Name]", std::string path = "");
     ~SlateBuffer();
+    std::string get_lines();
     std::string title;
-    std::string path;
 protected:
     int id;
     std::fstream file;
