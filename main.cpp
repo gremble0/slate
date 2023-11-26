@@ -8,12 +8,12 @@
 
 class SlateWindow : public Gtk::Window 
 {
-public:
-    SlateWindow();
-    void MakeButtonBox();
-protected:
-    void on_button_clicked();
-    Gtk::Button slate_button;
+    public:
+        SlateWindow();
+        void MakeButtonBox();
+    protected:
+        void on_button_clicked();
+        Gtk::Button slate_button;
 };
 
 SlateWindow::SlateWindow()
