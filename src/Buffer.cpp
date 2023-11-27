@@ -1,4 +1,5 @@
 #include "Buffer.hpp"
+#include "glibmm/refptr.h"
 
 #include <fstream>
 #include <string>
@@ -16,10 +17,9 @@ static int id_count = 0;
  * @param path  path to file opened by this buffer, empty string if 
  *              the buffer is not for a file
  */
-Buffer::Buffer(std::string title, std::string path)
+Buffer::Buffer(std::string path)
 {
     this->id = id_count++;
-    this->title = title;
 
     // TODO error checking
     file.open(path);

@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-Wall -Wextra -Isrc
 LINKS=`pkg-config --cflags --libs gtkmm-4.0`
 BUILD=build/
-OBJS=$(addprefix $(BUILD), Buffer.o Window.o main.o)
+OBJS=$(addprefix $(BUILD), Cursor.o Buffer.o Window.o main.o)
 
 dir_guard=@mkdir -p $(BUILD)
 
@@ -19,9 +19,13 @@ $(BUILD)Window.o: $(BUILD)Buffer.o Window.hpp
 	$(dir_guard)
 	$(CC) $(CFLAGS) $(LINKS) -c Window.cpp -o $(BUILD)Window.o
 
-$(BUILD)Buffer.o: Buffer.cpp Buffer.hpp
+$(BUILD)Buffer.o: $(BUILD)Cursor.o Buffer.cpp Buffer.hpp
 	$(dir_guard)
 	$(CC) $(CFLAGS) $(LINKS) -c Buffer.cpp -o $(BUILD)Buffer.o
+
+$(BUILD)Cursor.o: Cursor.hpp
+	$(dir_guard)
+	$(CC) $(CFLAGS) $(LINKS) -c Cursor.cpp -o $(BUILD)Cursor.o
 
 clean:
 	rm -f slate $(OBJS)

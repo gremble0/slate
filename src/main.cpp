@@ -1,5 +1,6 @@
-#include <gtkmm.h>
 #include "Window.hpp"
+
+#include <gtkmm.h>
 
 using namespace Slate;
 

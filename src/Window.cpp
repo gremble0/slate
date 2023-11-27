@@ -1,18 +1,16 @@
-#include <vector>
-
+#include "Buffer.hpp"
+#include "Window.hpp"
 #include "glibmm/refptr.h"
 #include "gtkmm/box.h"
 #include "gtkmm/enums.h"
 #include "gtkmm/scrolledwindow.h"
-#include "gtkmm/textbuffer.h"
 #include "gtkmm/textview.h"
-#include "Buffer.hpp"
-#include "Window.hpp"
+
+#include <vector>
 
 namespace Slate
 {
 
-// TODO: Slate::Window, Slate::Buffer, etc
 Window::Window()
 {
     set_title("Slate");
@@ -25,16 +23,15 @@ Window::Window()
     scrolled_window.set_expand();
     view.append(scrolled_window);
 
-    Buffer buffer = Buffer("Welcome to Slate");
-    buffers.push_back(&buffer);
-    active_buffer = Gtk::TextBuffer::create();
-    SetActiveBuffer(buffer);
+    active_buffer = Buffer::create();
+    buffers.push_back(active_buffer);
+    SetActiveBuffer(active_buffer);
 }
 
-void Window::SetActiveBuffer(Buffer &buffer)
+void Window::SetActiveBuffer(std::shared_ptr<Buffer> buffer)
 {
-    active_buffer->set_text(buffer.get_lines());
-    text_view.set_buffer(active_buffer);
+    active_buffer->set_text(buffer->cat_lines());
+    text_view.set_buffer(buffer);
 }
 
 }

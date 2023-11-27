@@ -3,6 +3,7 @@
 #include "gtkmm/textview.h"
 #include "gtkmm/window.h"
 #include "gtkmm/scrolledwindow.h"
+#include <memory>
 
 namespace Slate
 {
@@ -14,14 +15,14 @@ class Window : public Gtk::Window
 {
 public:
     Window();
-    void SetActiveBuffer(Buffer &buffer);
+    void SetActiveBuffer(std::shared_ptr<Buffer> buffer);
 protected:
     // TODO: integrate our types with the GTK types
-    std::vector<Buffer*> buffers;
+    std::vector<std::shared_ptr<Buffer>> buffers;
+    std::shared_ptr<Buffer> active_buffer;
     Gtk::ScrolledWindow scrolled_window;
     Gtk::TextView text_view;
     Gtk::Box view;
-    Glib::RefPtr<Gtk::TextBuffer> active_buffer;
 };
 
 }
