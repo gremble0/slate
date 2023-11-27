@@ -7,7 +7,7 @@
 #include "gtkmm/textbuffer.h"
 #include "gtkmm/textview.h"
 #include "ui.hpp"
-#include "SlateBuffer.cpp"
+#include "SlateBuffer.hpp"
 
 // TODO: Slate::Window, Slate::Buffer, etc
 class SlateWindow : public Gtk::Window 
@@ -24,7 +24,7 @@ class SlateWindow : public Gtk::Window
         Glib::RefPtr<Gtk::TextBuffer> active_buffer;
 };
 
-SlateWindow::SlateWindow() : view(Gtk::Orientation::VERTICAL)
+SlateWindow::SlateWindow()
 {
     set_title("Slate");
     set_child(view);
@@ -35,7 +35,6 @@ SlateWindow::SlateWindow() : view(Gtk::Orientation::VERTICAL)
     scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
     scrolled_window.set_expand();
     view.append(scrolled_window);
-    view.set_margin(5);
 
     SlateBuffer buffer = SlateBuffer("Welcome to Slate");
     buffers.push_back(&buffer);
