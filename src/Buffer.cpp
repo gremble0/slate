@@ -1,8 +1,8 @@
+#include "Buffer.hpp"
+
 #include <fstream>
 #include <string>
 #include <vector>
-
-#include "Buffer.hpp"
 
 namespace Slate
 {
@@ -35,7 +35,7 @@ Buffer::~Buffer()
     file.close();
 }
 
-std::string Buffer::get_lines()
+std::string Buffer::cat_lines()
 {
     std::string out = "";
 
