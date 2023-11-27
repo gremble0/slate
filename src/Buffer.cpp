@@ -1,5 +1,4 @@
 #include "Buffer.hpp"
-#include "glibmm/refptr.h"
 
 #include <fstream>
 #include <string>
@@ -10,16 +9,20 @@ namespace Slate
 
 static int id_count = 0;
 
-// TODO: inherit from Gtk::TextBuffer??
 /**
  * @param id    unique id for this buffer
  * @param title title for this buffer, empty if the buffer is for a file
  * @param path  path to file opened by this buffer, empty string if 
  *              the buffer is not for a file
  */
-Buffer::Buffer(std::string path)
+Buffer::Buffer(std::string title, std::string path)
 {
+    this->title = title;
     this->id = id_count++;
+
+    if (path == "") {
+        return;
+    }
 
     // TODO error checking
     file.open(path);
@@ -28,6 +31,7 @@ Buffer::Buffer(std::string path)
     while (std::getline(file, cur_line)) {
         lines.push_back(cur_line);
     }
+    set_text(cat_lines());
 }
 
 Buffer::~Buffer()

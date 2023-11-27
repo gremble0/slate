@@ -4,7 +4,6 @@
 #include "gtkmm/textbuffer.h"
 
 #include <fstream>
-#include <memory>
 #include <string>
 #include <vector>
 
@@ -14,12 +13,10 @@ namespace Slate
 class Buffer : public Gtk::TextBuffer
 {
 public:
-    Buffer(std::string path = "");
-    ~Buffer();
+    std::string title;
 
-    static std::shared_ptr<Buffer> create() {
-        return std::make_shared<Buffer>();
-    }
+    Buffer(std::string title = "", std::string path = "");
+    ~Buffer();
     std::string cat_lines();
 protected:
     int id;

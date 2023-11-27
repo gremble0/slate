@@ -6,6 +6,7 @@
 #include "gtkmm/scrolledwindow.h"
 #include "gtkmm/textview.h"
 
+#include <memory>
 #include <vector>
 
 namespace Slate
@@ -23,14 +24,15 @@ Window::Window()
     scrolled_window.set_expand();
     view.append(scrolled_window);
 
-    active_buffer = Buffer::create();
-    buffers.push_back(active_buffer);
-    SetActiveBuffer(active_buffer);
+    auto empty_buffer = std::make_shared<Buffer>("/home/herman/.gitignore");
+    OpenBuffer(empty_buffer, SplitMethod::REPLACE);
 }
 
-void Window::SetActiveBuffer(std::shared_ptr<Buffer> buffer)
+void Window::OpenBuffer(std::shared_ptr<Buffer> buffer, SplitMethod sm)
 {
-    active_buffer->set_text(buffer->cat_lines());
+    visible_buffers.push_back(buffer);
+    open_buffers.push_back(buffer);
+    // buffer->set_text(buffer->cat_lines());
     text_view.set_buffer(buffer);
 }
 
