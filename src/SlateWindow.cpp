@@ -6,7 +6,6 @@
 #include "gtkmm/scrolledwindow.h"
 #include "gtkmm/textbuffer.h"
 #include "gtkmm/textview.h"
-#include "ui.hpp"
 #include "SlateBuffer.hpp"
 #include "SlateWindow.hpp"
 

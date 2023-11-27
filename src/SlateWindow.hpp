@@ -7,6 +7,9 @@
 namespace Slate
 {
 
+#define WINDOW_WIDTH  1000
+#define WINDOW_HEIGHT 600
+
 class SlateWindow : public Gtk::Window 
 {
 public:
