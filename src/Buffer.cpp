@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "SlateBuffer.hpp"
+#include "Buffer.hpp"
 
 namespace Slate
 {
@@ -16,7 +16,7 @@ static int id_count = 0;
  * @param path  path to file opened by this buffer, empty string if 
  *              the buffer is not for a file
  */
-SlateBuffer::SlateBuffer(std::string title, std::string path)
+Buffer::Buffer(std::string title, std::string path)
 {
     this->id = id_count++;
     this->title = title;
@@ -30,12 +30,12 @@ SlateBuffer::SlateBuffer(std::string title, std::string path)
     }
 }
 
-SlateBuffer::~SlateBuffer()
+Buffer::~Buffer()
 {
     file.close();
 }
 
-std::string SlateBuffer::get_lines()
+std::string Buffer::get_lines()
 {
     std::string out = "";
 

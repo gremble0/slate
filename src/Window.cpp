@@ -6,14 +6,14 @@
 #include "gtkmm/scrolledwindow.h"
 #include "gtkmm/textbuffer.h"
 #include "gtkmm/textview.h"
-#include "SlateBuffer.hpp"
-#include "SlateWindow.hpp"
+#include "Buffer.hpp"
+#include "Window.hpp"
 
 namespace Slate
 {
 
 // TODO: Slate::Window, Slate::Buffer, etc
-SlateWindow::SlateWindow()
+Window::Window()
 {
     set_title("Slate");
     set_child(view);
@@ -25,13 +25,13 @@ SlateWindow::SlateWindow()
     scrolled_window.set_expand();
     view.append(scrolled_window);
 
-    SlateBuffer buffer = SlateBuffer("Welcome to Slate");
+    Buffer buffer = Buffer("Welcome to Slate");
     buffers.push_back(&buffer);
     active_buffer = Gtk::TextBuffer::create();
     SetActiveBuffer(buffer);
 }
 
-void SlateWindow::SetActiveBuffer(SlateBuffer &buffer)
+void Window::SetActiveBuffer(Buffer &buffer)
 {
     active_buffer->set_text(buffer.get_lines());
     text_view.set_buffer(active_buffer);

@@ -7,11 +7,11 @@
 namespace Slate
 {
 
-class SlateBuffer
+class Buffer
 {
 public:
-    SlateBuffer(std::string title = "[No Name]", std::string path = "");
-    ~SlateBuffer();
+    Buffer(std::string title = "[No Name]", std::string path = "");
+    ~Buffer();
     std::string get_lines();
     std::string title;
 protected:
