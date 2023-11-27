@@ -4,6 +4,9 @@
 
 #include "SlateBuffer.hpp"
 
+namespace Slate
+{
+
 static int id_count = 0;
 
 // TODO: inherit from Gtk::TextBuffer??
@@ -41,4 +44,6 @@ std::string SlateBuffer::get_lines()
     }
 
     return out;
+}
+
 }

@@ -4,6 +4,9 @@
 #include "gtkmm/window.h"
 #include "gtkmm/scrolledwindow.h"
 
+namespace Slate
+{
+
 class SlateWindow : public Gtk::Window 
 {
 public:
@@ -17,3 +20,5 @@ protected:
     Gtk::Box view;
     Glib::RefPtr<Gtk::TextBuffer> active_buffer;
 };
+
+}

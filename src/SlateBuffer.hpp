@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+namespace Slate
+{
+
 class SlateBuffer
 {
 public:
@@ -16,3 +19,5 @@ protected:
     std::fstream file;
     std::vector<std::string> lines;
 };
+
+}

@@ -10,6 +10,9 @@
 #include "SlateBuffer.hpp"
 #include "SlateWindow.hpp"
 
+namespace Slate
+{
+
 // TODO: Slate::Window, Slate::Buffer, etc
 SlateWindow::SlateWindow()
 {
@@ -35,3 +38,4 @@ void SlateWindow::SetActiveBuffer(SlateBuffer &buffer)
     text_view.set_buffer(active_buffer);
 }
 
+}
