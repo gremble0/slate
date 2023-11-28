@@ -1,8 +1,10 @@
 #include "Buffer.hpp"
+#include "gdkmm/enums.h"
 #include "gtkmm/box.h"
 #include "gtkmm/textview.h"
 #include "gtkmm/window.h"
 #include "gtkmm/scrolledwindow.h"
+
 #include <memory>
 
 namespace Slate
@@ -10,6 +12,10 @@ namespace Slate
 
 #define WINDOW_WIDTH  1000
 #define WINDOW_HEIGHT 600
+// TODO namespace instead?
+#define SHIFT_MASK Gdk::ModifierType::SHIFT_MASK
+#define CONTROL_MASK Gdk::ModifierType::CONTROL_MASK
+#define ALT_MASK Gdk::ModifierType::ALT_MASK
 
 enum class SplitMethod
 {
@@ -33,6 +39,8 @@ protected:
     Gtk::ScrolledWindow scrolled_window;
     Gtk::TextView text_view;
     Gtk::Box view;
+
+    bool handle_event(guint keyval, guint keycode, Gdk::ModifierType state);
 };
 
 }

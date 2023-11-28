@@ -1,4 +1,5 @@
 #include "Buffer.hpp"
+#include "gdkmm/event.h"
 
 #include <fstream>
 #include <string>
@@ -20,34 +21,25 @@ Buffer::Buffer(std::string title, std::string path)
     this->title = title;
     this->id = id_count++;
 
+    // If the buffer is not for a file return early
     if (path == "") {
         return;
     }
+
+    // Otherwise read the file contents into the lines vector
 
     // TODO error checking
     file.open(path);
 
     std::string cur_line;
     while (std::getline(file, cur_line)) {
-        lines.push_back(cur_line);
+        set_text(get_text() + cur_line + "\n");
     }
-    set_text(cat_lines());
 }
 
 Buffer::~Buffer()
 {
     file.close();
-}
-
-std::string Buffer::cat_lines()
-{
-    std::string out = "";
-
-    for (std::string line : lines) {
-        out.append(line + "\n");
-    }
-
-    return out;
 }
 
 }

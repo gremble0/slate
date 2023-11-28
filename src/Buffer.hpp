@@ -17,7 +17,6 @@ public:
 
     Buffer(std::string title = "", std::string path = "");
     ~Buffer();
-    std::string cat_lines();
 protected:
     int id;
     std::fstream file;
