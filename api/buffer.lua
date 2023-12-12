@@ -17,7 +17,7 @@ local api = require("api")
 ---@field active_buf Buffer
 local M = {}
 
--- TODO: maybe move buffer commands to separate module if slate module grows too big
+-- TODO: optionally takes a file_path
 ---Vertically split the active buffer
 M.vsplit = function()
   local new_buf = { ---@class Buffer
@@ -58,27 +58,49 @@ end
 
 ---@param file_path? string path to file to open, opens empty scratch buffer if nil
 M.open_buffer = function(file_path)
+  -- TODO: disallow opening of already opened files?
+  local new_buf
   if file_path == nil then
-    local new_buf = {
+    new_buf = {
       id = #M.open_bufs + 1,
       name = "*scratch*",
+      cursor = { x = 0, y = 0 },
+      lines = { "**Empty scratch buffer**" }, -- temporary lines
     }
+  else
+    new_buf = {
+      id = #M.open_bufs + 1,
+      name = file_path, -- TODO: prettify name
+      cursor = { x = 0, y = 0 },
+      lines = { "**Empty scratch buffer**" }, -- temporary lines
+    }
+    api.open_buffer(file_path)
   end
 
-  M.active_buf = #M.open_bufs + 1
-  M.open_bufs[#M.open_bufs + 1] = M.active_buf
-  api.open_buffer(file_path)
+  M.open_bufs[#M.open_bufs + 1] = new_buf
+  M.active_buf = new_buf
 end
 
 ---@param bufid integer id of buffer to close, 0 for active buffer
-M.close_buffer = function(bufid) end
+M.close_buffer = function(bufid)
+  for i, buf in ipairs(M.open_bufs) do
+    if buf.id == bufid then
+      M.open_bufs[i] = M.open_bufs[i + 1]
+      api.close_buffer(i)
+    end
+  end
+end
 
 ---Begins visual selection at given cursor position
 ---@param cursor_x integer
 ---@param cursor_y integer
-M.begin_selection = function(cursor_x, cursor_y) end
+M.begin_selection = function(cursor_x, cursor_y)
+  api.begin_selection(cursor_x, cursor_y)
+end
 
 ---Ends selection if active
-M.end_selection = function() end
+M.end_selection = function()
+  api.end_selection()
+end
 
 return M
