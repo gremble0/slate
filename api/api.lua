@@ -8,21 +8,6 @@ require("mode")
 ---@field visible_bufs integer[]
 local M = {}
 
----Set a function to be executed upon entering the given keymap in the given mode
----@param mode Mode
----@param keys string
----@param command fun()
----@param desc? string
-M.set_keymap = function (mode, keys, command, desc)
-  mode.keymap[keys] = { command, desc }
-end
-
----@param mode Mode
----@param keys string
-M.remove_keymap = function(mode, keys)
-  mode.keymap[keys] = nil
-end
-
 -- TODO: maybe move buffer commands to separate module if slate module grows too big
 ---Vertically split the window
 M.vsplit = function() end
