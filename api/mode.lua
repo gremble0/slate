@@ -10,6 +10,7 @@
 
 ---Maps modes to an array of keybinds
 ---@class Modes
+---@field active_mode Mode
 ---@field modes Mode[]
 local M = {}
 
