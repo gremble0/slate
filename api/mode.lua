@@ -9,7 +9,7 @@
 ---@field commands table<string, Command>
 
 ---Maps modes to an array of keybinds
----@class Modes
+---@class Slate.Modes
 ---@field active_mode Mode
 ---@field modes Mode[]
 local M = {}
