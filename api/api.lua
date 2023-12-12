@@ -1,4 +1,4 @@
----Defines functions that once run will be ran by the C++ core
+---Defines functions that once run will be forwarded to the C++ core
 ---@meta
 
 ---@class Slate.Api
@@ -21,6 +21,9 @@ M.open_buffer = function(file_path) end
 
 ---@param bufid integer id of buffer to close
 M.close_buffer = function(bufid) end
+
+---@param bufid integer id of buffer to save, raises error if not a file-buffer?
+M.save_buffer = function(bufid) end
 
 ---Begins visual selection at given cursor position
 ---@param cursor_x integer

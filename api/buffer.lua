@@ -103,4 +103,9 @@ M.end_selection = function()
   api.end_selection()
 end
 
+---Saves current contents of buffer
+M.save_buffer = function()
+  api.save_buffer(M.active_buf.id)
+end
+
 return M
