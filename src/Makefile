@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Wall -Wextra -Isrc
+CFLAGS=-Wall -Wextra -Isrc -I../lib/sol2/include -llua
 LINKS=`pkg-config --cflags --libs gtkmm-4.0`
 BUILD=build/
 OBJS=$(addprefix $(BUILD), Cursor.o Buffer.o Window.o main.o)
