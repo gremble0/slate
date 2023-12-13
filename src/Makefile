@@ -2,14 +2,18 @@ CC=g++
 CFLAGS=-Wall -Wextra -Isrc -I../lib/sol2/include -llua
 LINKS=`pkg-config --cflags --libs gtkmm-4.0`
 BUILD=build/
+BIN=bin/
 OBJS=$(addprefix $(BUILD), Cursor.o Buffer.o Window.o main.o)
+BINS=$(BIN)slate
 
 dir_guard=@mkdir -p $(BUILD)
+bin_guard=@mkdir -p $(BIN)
 
 all: slate
 
 slate: $(OBJS)
-	$(CC) $(CFLAGS) $(LINKS) $(OBJS) -o slate 
+	$(bin_guard)
+	$(CC) $(CFLAGS) $(LINKS) $(OBJS) -o $(BIN)slate 
 
 $(BUILD)main.o: $(addprefix $(BUILD), Buffer.o Window.o)
 	$(dir_guard)
@@ -28,4 +32,4 @@ $(BUILD)Cursor.o: Cursor.hpp
 	$(CC) $(CFLAGS) $(LINKS) -c Cursor.cpp -o $(BUILD)Cursor.o
 
 clean:
-	rm -f slate $(OBJS)
+	rm -f $(OBJS) $(BINS)
