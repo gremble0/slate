@@ -37,7 +37,7 @@ Window::Window()
     this->text_view.get_style_context()->add_provider(css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     // Open empty buffer
-    auto empty_buffer = std::make_shared<Buffer>("", "window.css"); // temporary random file
+    auto empty_buffer = std::make_shared<Buffer>(); // temporary random file
     this->open_buffer(empty_buffer, SplitMethod::REPLACE);
 
     // Handle events (keyboard input)
@@ -45,7 +45,7 @@ Window::Window()
     controller->signal_key_pressed().connect(
         sigc::mem_fun(*this, &Window::handle_event), false
     );
-    add_controller(controller);
+    this->add_controller(controller);
 }
 
 /**

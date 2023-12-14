@@ -34,13 +34,13 @@ public:
     Window();
     void open_buffer(std::shared_ptr<Buffer> buffer, SplitMethod sm);
 protected:
+    bool handle_event(guint keyval, guint keycode, Gdk::ModifierType state);
+
     std::vector<std::shared_ptr<Buffer>> open_buffers;
     Gtk::ScrolledWindow scrolled_window;
     Gtk::TextView text_view;
     Gtk::Box view;
     std::shared_ptr<Gtk::CssProvider> css_provider;
-
-    bool handle_event(guint keyval, guint keycode, Gdk::ModifierType state);
 };
 
 }

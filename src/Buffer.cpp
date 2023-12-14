@@ -14,17 +14,17 @@ static int id_count = 0;
  * @param path  path to file opened by this buffer, empty string if 
  *              the buffer is not for a file
  */
-Buffer::Buffer(std::string title, std::string path)
+Buffer::Buffer(std::string path)
 {
-    this->title = title;
     this->id = id_count++;
 
     // If the buffer is not for a file return early
     if (path == "") {
+        this->title = "*scratch*";
         return;
     }
-
     // Otherwise read the file contents into the lines vector
+    this->title = path;
 
     // TODO error checking
     file.open(path);

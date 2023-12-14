@@ -13,10 +13,10 @@ namespace Slate
 class Buffer : public Gtk::TextBuffer
 {
 public:
-    std::string title;
-
-    Buffer(std::string title = "", std::string path = "");
+    Buffer(std::string path = "");
     ~Buffer();
+
+    std::string title;
 protected:
     int id;
     std::fstream file;
