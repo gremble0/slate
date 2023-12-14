@@ -2,6 +2,7 @@
 #include "Window.hpp"
 #include "glibmm/refptr.h"
 #include "gtkmm/box.h"
+#include "gtkmm/cssprovider.h"
 #include "gtkmm/enums.h"
 #include "gtkmm/eventcontrollerkey.h"
 #include "gtkmm/scrolledwindow.h"
@@ -28,6 +29,18 @@ Window::Window()
     scrolled_window.set_expand();
     view.append(scrolled_window);
     set_child(view);
+
+    // CSS styling
+    scrolled_window.set_name("scrolled-window");
+    view.set_name("scrolled-window");
+    auto css_provider = Gtk::CssProvider::create();
+    std::string css = "scrolled-window {color: #ff0000;} .scrolled-window {color: #ff0000;} #scrolled-window {color: #ff0000;}";
+    css_provider->load_from_data(css);
+
+    auto scrolled_window_context = scrolled_window.get_style_context();
+    auto view_context = view.get_style_context();
+    scrolled_window_context->add_provider(css_provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    view_context->add_provider(css_provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
     // Open empty buffer
     std::shared_ptr<Buffer> empty_buffer = std::make_shared<Buffer>("", "/home/herman/.gitignore"); // temporary random file
