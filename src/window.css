@@ -1,23 +1,5 @@
-scrolled-window {
-    background-color: #ff0000;
-}
-
 .scrolled-window {
-    background-color: #ff0000;
+    background-color: #151515;
+    color: #cccccc;
+    font-family: JetBrainsMono NFM;
 }
-
-#scrolled-window {
-    background-color: #ff0000;
-}
-/**/
-/* GtkTextView { */
-/*     color: #ff0000; */
-/* } */
-/**/
-/* .textview { */
-/*     color: #ff0000; */
-/* } */
-/**/
-/* textview { */
-/*     color: #00ff00; */
-/* } */

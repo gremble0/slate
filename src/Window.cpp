@@ -32,7 +32,7 @@ Window::Window()
 
     // CSS styling
     this->css_provider = Gtk::CssProvider::create();
-    css_provider->load_from_path("window.css");
+    this->css_provider->load_from_path("window.css");
     this->text_view.add_css_class("scrolled-window");
     this->text_view.get_style_context()->add_provider(css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
 
