@@ -1,9 +1,7 @@
 #include "Buffer.hpp"
-#include "gdkmm/event.h"
 
 #include <fstream>
 #include <string>
-#include <vector>
 
 namespace Slate
 {

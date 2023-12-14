@@ -1,7 +1,9 @@
 #include "Buffer.hpp"
 #include "gdkmm/enums.h"
 #include "gtkmm/box.h"
+#include "gtkmm/cssprovider.h"
 #include "gtkmm/textview.h"
+#include "gtkmm/widget.h"
 #include "gtkmm/window.h"
 #include "gtkmm/scrolledwindow.h"
 
@@ -12,7 +14,7 @@ namespace Slate
 
 #define WINDOW_WIDTH  1000
 #define WINDOW_HEIGHT 600
-// TODO namespace instead?
+// TODO namespace instead? also: for platform neutrality alternative for control? cmd?
 #define SHIFT_MASK Gdk::ModifierType::SHIFT_MASK
 #define CONTROL_MASK Gdk::ModifierType::CONTROL_MASK
 #define ALT_MASK Gdk::ModifierType::ALT_MASK
@@ -30,15 +32,13 @@ class Window : public Gtk::Window
 {
 public:
     Window();
-    void OpenBuffer(std::shared_ptr<Buffer> buffer, SplitMethod sm);
+    void open_buffer(std::shared_ptr<Buffer> buffer, SplitMethod sm);
 protected:
-    // TODO: integrate our types with the GTK types
     std::vector<std::shared_ptr<Buffer>> open_buffers;
-    // std::shared_ptr<Buffer> active_buffer;
-    std::vector<std::shared_ptr<Buffer>> visible_buffers;
     Gtk::ScrolledWindow scrolled_window;
     Gtk::TextView text_view;
     Gtk::Box view;
+    std::shared_ptr<Gtk::CssProvider> css_provider;
 
     bool handle_event(guint keyval, guint keycode, Gdk::ModifierType state);
 };
