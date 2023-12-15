@@ -1,4 +1,5 @@
 #include "Buffer.hpp"
+#include "gtkmm/textiter.h"
 
 #include <fstream>
 #include <string>
@@ -38,6 +39,34 @@ Buffer::Buffer(std::string path)
 Buffer::~Buffer()
 {
     file.close();
+}
+
+void Buffer::move_back_char()
+{
+    Gtk::TextIter iter = this->get_insert()->get_iter();
+    iter.backward_char();
+    this->place_cursor(iter);
+}
+
+void Buffer::move_forward_char()
+{
+    Gtk::TextIter iter = this->get_insert()->get_iter();
+    iter.forward_char();
+    this->place_cursor(iter);
+}
+
+void Buffer::move_backward_line()
+{
+    Gtk::TextIter iter = this->get_insert()->get_iter();
+    iter.backward_line();
+    this->place_cursor(iter);
+}
+
+void Buffer::move_forward_line()
+{
+    Gtk::TextIter iter = this->get_insert()->get_iter();
+    iter.forward_line();
+    this->place_cursor(iter);
 }
 
 }

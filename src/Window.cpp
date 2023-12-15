@@ -64,7 +64,8 @@ void Window::open_buffer(std::shared_ptr<Buffer> buffer, SplitMethod sm)
 bool Window::handle_event(guint keyval, guint, Gdk::ModifierType state)
 {
     // TODO: hook up with user config - maybe hard code some keybindings
-    std::cout << keyval << std::endl;
+    auto asd = this->open_buffers.at(0);
+    asd->move_forward_line();
     return false;
 }
 
